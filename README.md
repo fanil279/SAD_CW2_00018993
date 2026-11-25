@@ -5,6 +5,7 @@ Individual Systems Analysis and Design coursework (CW2). A React + TypeScript + 
 > **Academic prototype — not an official Safia application.** It uses no real Safia APIs, inventory, branches, payment or delivery services. All products, prices (UZS), addresses, branches, orders and payments are sample/simulated data.
 
 ## Install and run
+
 Requires Node.js 18+ (built with Node 22). Package manager: **npm** (no pnpm lockfile existed; `package-lock.json` is included).
 
 ```bash
@@ -15,27 +16,30 @@ npm run build      # typecheck + production build into dist/
 npm run preview    # serve the production build
 npm test           # pricing-rule self-checks (8 assertions)
 ```
+
 Demo login: any valid Uzbek mobile number (e.g. `90 123 45 67`), verification code **123456**.
 Routing uses `HashRouter`, so the built `dist/` also works from any static host.
 
 ## The 12 screens
-| # | Screen | Route |
-|---|--------|-------|
-| 1 | Welcome / Login (phone + simulated code) | `/#/` |
-| 2 | Home / Product Catalogue (search, categories, empty state) | `/#/catalogue` |
-| 3 | Product Details (quantity, stock limit) | `/#/product/:id` |
-| 4 | Shopping Cart | `/#/cart` |
-| 5 | Fulfilment Selection | `/#/fulfilment` |
-| 6A | Delivery Details | `/#/delivery` |
-| 7A | Schedule Pre-order | `/#/schedule?type=delivery\|pickup` |
-| 6B | Pickup Details | `/#/pickup` |
-| 8 | Order Review (promo, fees, total) | `/#/review` |
-| 9 | Payment (simulated success / failure / pending) | `/#/payment` |
-| 10 | Order Confirmation | `/#/confirmation/:ref` |
-| 11 | Order History / Tracking | `/#/orders`, `/#/orders/:ref` |
-| 12 | Profile | `/#/profile` |
+
+| #   | Screen                                                     | Route                               |
+| --- | ---------------------------------------------------------- | ----------------------------------- |
+| 1   | Welcome / Login (phone + simulated code)                   | `/#/`                               |
+| 2   | Home / Product Catalogue (search, categories, empty state) | `/#/catalogue`                      |
+| 3   | Product Details (quantity, stock limit)                    | `/#/product/:id`                    |
+| 4   | Shopping Cart                                              | `/#/cart`                           |
+| 5   | Fulfilment Selection                                       | `/#/fulfilment`                     |
+| 6A  | Delivery Details                                           | `/#/delivery`                       |
+| 7A  | Schedule Pre-order                                         | `/#/schedule?type=delivery\|pickup` |
+| 6B  | Pickup Details                                             | `/#/pickup`                         |
+| 8   | Order Review (promo, fees, total)                          | `/#/review`                         |
+| 9   | Payment (simulated success / failure / pending)            | `/#/payment`                        |
+| 10  | Order Confirmation                                         | `/#/confirmation/:ref`              |
+| 11  | Order History / Tracking                                   | `/#/orders`, `/#/orders/:ref`       |
+| 12  | Profile                                                    | `/#/profile`                        |
 
 ## Implemented features
+
 - Phone validation, simulated OTP, protected routes, logout.
 - Search (header, live) and category filtering; empty-search state.
 - Cart add/remove/quantity, stock limits (on detail page, cart and add buttons), automatic subtotal, empty state.
@@ -50,6 +54,7 @@ Routing uses `HashRouter`, so the built `dist/` also works from any static host.
 - Responsive: mobile (375), tablet (768), desktop (1440) — top nav on desktop, bottom tab bar on mobile; no horizontal overflow on tested pages.
 
 ## Structure
+
 ```
 src/
   components/  Layout, ProductCard, OrderSummary, Shared
@@ -64,13 +69,15 @@ scripts/e2e_check.py  optional Playwright smoke test
 ```
 
 ## Design notes and known limitations
+
 - Tokens were matched by eye to the five screenshots (burgundy `#8E2428`, cream `#F6EEE4`, Playfair Display headings, DM Sans UI text). Fonts load from Google Fonts, so a connection is needed for exact typography (system serif/sans fallbacks otherwise).
 - Only three real photographs exist (the croissant hero, Butter Croissant, Rustic Seeded Loaf — cropped from your screenshots). Other products show a tonal placeholder tile; replace with real photos in `public/images/` and `src/data/index.ts`.
 - Screens 6A, 7A, 6B, 8, 9, 10, 11, 12 and the login were designed from the shared design language, not from screenshots.
 - The demo is client-side only: no backend, no real SMS, payment or tracking. Order statuses are static simulations.
 
 ## Recording the (max one minute) demonstration
+
 1. `npm install && npm run dev`, open the URL in Chrome; use DevTools device mode (iPhone 14, 390×844).
 2. Start a screen recorder (Windows: Win+G; macOS: Shift+Cmd+5; or OBS).
-3. Suggested ~55 s script: login (90 123 45 67 / 123456) → search "rustic" → open Butter Croissant, add 2 → cart → Continue → Home delivery → pick address, tomorrow, slot → review, apply `WELCOME10` → payment: show *Fail* then retry with *Succeed* → confirmation → Orders → Profile.
+3. Suggested ~55 s script: login (90 123 45 67 / 123456) → search "rustic" → open Butter Croissant, add 2 → cart → Continue → Home delivery → pick address, tomorrow, slot → review, apply `WELCOME10` → payment: show _Fail_ then retry with _Succeed_ → confirmation → Orders → Profile.
 4. Trim to ≤ 60 s and export as MP4.

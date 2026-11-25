@@ -6,5 +6,11 @@ import { StoreProvider } from './context/StoreContext';
 import './styles/global.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode><HashRouter><StoreProvider><App /></StoreProvider></HashRouter></React.StrictMode>,
+    <React.StrictMode>
+        <HashRouter>
+            <StoreProvider>
+                <App />
+            </StoreProvider>
+        </HashRouter>
+    </React.StrictMode>
 );
